@@ -33,3 +33,7 @@ The extended series pairs the retained rich brand artwork with exact explanatory
 The original generated editorial illustrations remain available in assets/insights; no logo is recreated. Exact diagrams are authored as vectors because relationships, ordering and labels must remain controlled. Each diagram has an accessible HTML equivalent and an image description. Do not crop diagram previews.
 
 Source changes: edit content/articles.json, run `python3 scripts/build_content.py`, then render changed diagram PNGs. Inspect the PNG output before committing. The website is buildless; GitHub only regenerates HTML/SVG to detect drift and validates the committed PNGs. Internal source/docs/scripts are excluded from the published artifact.
+
+## Infographics within articles
+
+Navigation thumbnails never substitute for an in-article visual. The three rich illustrated PNGs appear full-width after the opening explanation of their matching articles. All ten precise diagrams sit inside the article reading flow after the third section. Preserve full-size viewing, descriptive captions, alt text and direct PNG downloads. Keep text in a readable narrow column while figures use the wider editorial container; never crop article figures.

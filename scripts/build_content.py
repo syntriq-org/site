@@ -22,6 +22,15 @@ def card(a,prefix=''):
 def figure(a,prefix=''):
  name=a['slug'];alt='; '.join(n[0]+': '+n[1] for n in a['nodes'])
  return f'<figure class="container article-figure"><a href="{prefix}assets/diagrams/{name}.png" aria-label="Open full-size infographic: {e(a["title"])}"><img src="{prefix}assets/diagrams/{name}.png" srcset="{prefix}assets/diagrams/{name}-preview.png 1000w, {prefix}assets/diagrams/{name}.png 2000w" sizes="(max-width: 1200px) 100vw, 1200px" alt="{e(alt)}" width="2000" height="1300" loading="lazy"></a><figcaption><span>A visual guide · open to inspect at full size</span><a href="{prefix}assets/diagrams/{name}.png" download>Download PNG ↗</a></figcaption></figure>'
+def rich_figure(a):
+ art={
+  'one-connected-business-story':('connected-business','A shared application model connects business entities, workflows, analytics and AI-assisted engineering.'),
+  'ai-with-application-context':('ai-context','A browser workbench connects an application catalogue, cloud reasoning, engineering tools and a visible evidence journal.'),
+  'simulate-before-you-release':('simulation-evidence','Routine, boundary and fault scenarios feed a simulation laboratory, evidence collection and a verification gateway.')
+ }
+ if a['slug'] not in art: return ''
+ name,alt=art[a['slug']]; src='../assets/insights/'+name+'.png'
+ return f'<figure class="container article-figure rich-infographic"><a href="{src}" aria-label="Open full-size illustrated infographic: {e(a["title"])}"><img src="{src}" alt="{e(alt)}" width="1536" height="1024" loading="lazy"></a><figcaption><span>{e(alt)}</span><a href="{src}" download>Download illustrated PNG ↗</a></figcaption></figure>'
 def svg(a):
  s=['<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1300" viewBox="0 0 2000 1300"><defs><radialGradient id="bg"><stop stop-color="#133744"/><stop offset="1" stop-color="#090f1a"/></radialGradient><linearGradient id="card" x2="1" y2="1"><stop stop-color="#183844"/><stop offset="1" stop-color="#0e1a2a"/></linearGradient><linearGradient id="accent"><stop stop-color="#20bbae"/><stop offset="1" stop-color="#31c3ea"/></linearGradient><marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#31c3ea" stroke-width="1.4"/></marker></defs><rect width="2000" height="1300" fill="url(#bg)"/>']
  for x in range(60,2000,60):
@@ -47,10 +56,14 @@ def svg(a):
  s.append('</svg>');return ''.join(s)
 for i,a in enumerate(A):
  (R/'assets/diagrams'/f'{a["slug"]}.svg').write_text(svg(a))
- sections=''.join('<section><h2>'+e(h)+'</h2>'+''.join('<p>'+e(p)+'</p>' for p in t.split('\n'))+'</section>' for h,t in a['sections'])
  toc='<nav class="article-toc" aria-label="Article sections">'+''.join(f'<a href="#section-{j}">{e(h)}</a>' for j,(h,_) in enumerate(a['sections']))+'</nav>'
- for j in range(len(a['sections'])):sections=sections.replace('<section>',f'<section id="section-{j}">',1)
- body=f'<div class="container article-heading"><a class="back-link" href="index.html">← All insights</a><div class="eyebrow">SYNTRIQ INSIGHTS / {e(a["category"])}</div><h1>{e(a["title"])}</h1><p class="article-deck">{e(a["deck"])}</p></div>'+figure(a,'../')+f'<article class="article-body">{toc}{sections}<div class="takeaway"><span>THE BUSINESS VALUE</span><p>{e(a["takeaway"])}</p></div></article><section class="container related"><div class="eyebrow">CONTINUE EXPLORING</div><h2>Follow the connected story.</h2><div class="insights-grid two">'+card(A[(i+1)%len(A)],'../')+card(A[(i+3)%len(A)],'../')+'</div></section>'
+ reading='<article class="article-content"><div class="article-body article-segment">'+toc+'</div>'
+ for j,(h,t) in enumerate(a['sections']):
+  reading+=f'<section class="article-body article-segment" id="section-{j}"><h2>{e(h)}</h2>'+''.join('<p>'+e(p)+'</p>' for p in t.split('\n'))+'</section>'
+  if j == 0: reading+=rich_figure(a)
+  if j == 2: reading+=figure(a,'../')
+ reading+='<div class="article-body"><div class="takeaway"><span>THE BUSINESS VALUE</span><p>'+e(a['takeaway'])+'</p></div></div></article>'
+ body=f'<div class="container article-heading"><a class="back-link" href="index.html">← All insights</a><div class="eyebrow">SYNTRIQ INSIGHTS / {e(a["category"])}</div><h1>{e(a["title"])}</h1><p class="article-deck">{e(a["deck"])}</p></div>'+reading+'<section class="container related"><div class="eyebrow">CONTINUE EXPLORING</div><h2>Follow the connected story.</h2><div class="insights-grid two">'+card(A[(i+1)%len(A)],'../')+card(A[(i+3)%len(A)],'../')+'</div></section>'
  (R/'insights'/f'{a["slug"]}.html').write_text(page(a['title'],a['deck'],f'insights/{a["slug"]}.html',body,'../',f'assets/diagrams/{a["slug"]}.png'))
 body='<div class="container article-heading"><div class="eyebrow">SYNTRIQ INSIGHTS</div><h1>The thinking behind<br>the connected platform.</h1><p class="article-deck">Explore business meaning, explainable decisions and AI-assisted engineering. Start with the overview, then follow the connections that matter to you.</p><div class="topic-links"><a href="#foundation">Platform foundations</a><a href="#engineering">AI & engineering</a><a href="#domain">Applications</a></div></div>'
 for id,title,indices in [('foundation','Understand the platform',[0,3,4,5,6,7]),('engineering','Build with context and evidence',[1,2,8]),('domain','See the application boundary',[9])]:
