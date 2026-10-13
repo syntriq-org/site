@@ -37,3 +37,7 @@ Source changes: edit content/articles.json, run `python3 scripts/build_content.p
 ## Infographics within articles
 
 Navigation thumbnails never substitute for an in-article visual. The three rich illustrated PNGs appear full-width after the opening explanation of their matching articles. All ten precise diagrams sit inside the article reading flow after the third section. Preserve full-size viewing, descriptive captions, alt text and direct PNG downloads. Keep text in a readable narrow column while figures use the wider editorial container; never crop article figures.
+
+## Public-site links
+
+Display infographics directly in the article. Do not offer PNG downloads, direct image-file links or GitHub/repository links on public pages. Keep calls to action within the commercial site. This supersedes earlier download and full-size-link guidance above.
