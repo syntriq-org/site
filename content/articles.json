@@ -1,0 +1,552 @@
+[
+  {
+    "slug": "one-connected-business-story",
+    "title": "One connected business story",
+    "category": "The platform",
+    "deck": "Connect the meaning of your data, the flow of your work and the evidence behind every decision.",
+    "nodes": [
+      [
+        "Business model",
+        "Entities · relationships · meaning"
+      ],
+      [
+        "Business rules",
+        "Constraints · policies · reasons"
+      ],
+      [
+        "Coordinated work",
+        "Events · tasks · commands"
+      ],
+      [
+        "Business history",
+        "Effective time · recorded knowledge"
+      ],
+      [
+        "Trusted measures",
+        "Definitions · scope · evidence"
+      ],
+      [
+        "AI engineering",
+        "Context · tools · candidate changes"
+      ]
+    ],
+    "sections": [
+      [
+        "The cost of disconnected definitions",
+        "A customer appears in an onboarding form, an agreement, a workflow and a report. Each view serves a different purpose, but all describe the same business relationship. When those definitions drift apart, people reconcile the differences manually. A changed approval condition can reach the form before it reaches the process. A report can count agreements differently from the operational screen.\nSyntriq organises these concerns around a shared application model. The model gives entities and relationships explicit meaning, while contracts describe the behaviour attached to them. The useful connection is between what the business means and what the application does."
+      ],
+      [
+        "Give each layer a clear responsibility",
+        "The ontology provides the semantic foundation. Constraints describe acceptable data. Decision policies apply business choices. Workflows coordinate steps, and commands apply permitted changes. These responsibilities connect without becoming interchangeable.\nGraphQL offers typed access to the application and its metadata. It is an interface over the model. A query can expose a customer alongside the relationships, constraints or temporal context needed to interpret that customer correctly."
+      ],
+      [
+        "Follow an agreement through the system",
+        "Consider an agreement that needs an additional approval when its value crosses a threshold. The form gathers the relevant facts. A decision evaluates those facts against a policy. The workflow routes the agreement to an authorised reviewer. A command records the permitted transition.\nThe analytical view can then distinguish submitted, approved and activated agreements using the same business definitions. Historical context explains which policy and facts applied when a particular agreement was evaluated."
+      ],
+      [
+        "Give engineering the same context",
+        "An engineer changing the approval process needs to see the connected definitions. The application catalogue and Context Engine give AI-assisted engineering a route to the relevant sources, dependencies and checks. A proposed change can be explored in a candidate workspace and exercised against synthetic scenarios.\nThis creates a common thread between product design and engineering review. The business rule being discussed is tied to the rule being evaluated, and the evidence can refer to the version being reviewed."
+      ],
+      [
+        "Carry the foundation across applications",
+        "ChargeWeave provides an EV-domain example: charging relationships, settlement policies, operational workflows and measures form an application package. Syntriq supplies the reusable mechanisms that interpret and execute supported contracts.\nKeeping domain definitions separate gives the platform a route into other applications without adding charging-specific branches to the core. Each domain brings its own meaning; the shared foundation preserves the connections."
+      ]
+    ],
+    "takeaway": "Keep business definitions connected as they move through screens, decisions, processes and analysis."
+  },
+  {
+    "slug": "ai-with-application-context",
+    "title": "Give AI the context to act precisely",
+    "category": "AI & context",
+    "deck": "Connect AI to the application’s current components, rules and evidence, so each proposed change starts with understanding.",
+    "nodes": [
+      [
+        "Application catalogue",
+        "Models · rules · forms · tools"
+      ],
+      [
+        "Selected context",
+        "Relevant sources · dependency paths"
+      ],
+      [
+        "Reasoning",
+        "Bounded proposal · explicit questions"
+      ],
+      [
+        "Capability broker",
+        "Typed requests · permitted tools"
+      ],
+      [
+        "Runtime evidence",
+        "Checks · traces · comparisons"
+      ],
+      [
+        "Task journal",
+        "Decisions · attempts · next questions"
+      ]
+    ],
+    "sections": [
+      [
+        "Make the application discoverable",
+        "An AI model can write a convincing answer without knowing which components your application already has. Syntriq’s integration design starts with an application catalogue: an index connecting models, forms, workflows, rules and tools to their sources, dependencies and evidence.\nWhen an engineer asks for another approval condition, the catalogue helps locate the current workflow, the rule it calls, the form collecting the facts and the scenarios exercising the decision. That is a more useful starting point than a general description of the product."
+      ],
+      [
+        "Assemble context for the actual task",
+        "The Context Engine selects evidence for a bounded task. Exact names and text provide a direct starting point; known relationships reveal connected definitions. Source passages supply the detail needed to understand a contract. Additional retrieval methods can help navigate larger collections.\nThe selected context should remain inspectable: where each item came from, which source version it represents and why it was included. Missing or conflicting definitions become visible questions. They should not quietly turn into assumptions."
+      ],
+      [
+        "Connect reasoning to controlled tools",
+        "The OpenAI integration design uses an authenticated relay to connect cloud reasoning to the browser workbench. The primary adapter direction is the Responses API, behind an interface that allows model providers to change. Credentials belong at the authenticated boundary, outside the public static site.\nThe browser coordinator owns the task. A capability broker validates supported requests before invoking local tools or an explicitly configured external provider. The model can request a definition, propose a change or ask for a scenario run; each operation has an input contract and a defined result."
+      ],
+      [
+        "Keep context, memory and caching distinct",
+        "Context answers what this step needs to know. The task journal records decisions, attempted changes, results and unresolved questions. Caching avoids repeating eligible work, such as parsing an unchanged definition.\nThese layers have different validity rules. A journal records that a test ran, but the evidence must still match the candidate being reviewed. A cached result can be reused only when its relevant inputs and versions match. Efficiency and correctness require separate checks."
+      ],
+      [
+        "Return evidence to the engineer",
+        "The workbench connects proposed changes to runtime feedback: constraint violations, decision traces, behavioural comparisons and scenario outcomes. AI can use the results to investigate a failure and revise its proposal. The engineer can inspect both the change and the basis for it.\nOptional research, repository and build providers extend the workflow through explicit capabilities. They do not erase the boundary between a proposed action and a permitted operation. The commercial value is a visible engineering process grounded in application-specific evidence."
+      ]
+    ],
+    "takeaway": "Ground AI assistance in current application definitions, explicit tools and inspectable evidence."
+  },
+  {
+    "slug": "simulate-before-you-release",
+    "title": "Explore change before it reaches operations",
+    "category": "Simulation & evidence",
+    "deck": "Use synthetic scenarios to explore normal operations, difficult exceptions and the effects of a change.",
+    "nodes": [
+      [
+        "Candidate version",
+        "Isolated change · recorded inputs"
+      ],
+      [
+        "Routine scenarios",
+        "Expected facts · normal journeys"
+      ],
+      [
+        "Boundary scenarios",
+        "Thresholds · missing information"
+      ],
+      [
+        "Fault scenarios",
+        "Retries · invalid transitions"
+      ],
+      [
+        "Evidence comparison",
+        "Outcomes · traces · differences"
+      ],
+      [
+        "Independent checks",
+        "Repository tests · release review"
+      ]
+    ],
+    "sections": [
+      [
+        "Turn a change into a question",
+        "A new approval condition sounds small until it interacts with existing work. What happens to an agreement exactly at the threshold? What if a required fact is missing? Can a retried request apply the same action twice? These questions are easier to examine before a change reaches an operational environment.\nSyntriq’s simulation story places a candidate workspace beside the application model and its supported runtime. The purpose is to make a proposed behaviour observable using controlled inputs."
+      ],
+      [
+        "Choose scenarios that reveal behaviour",
+        "Routine scenarios show the expected journey. Boundary scenarios exercise thresholds, dates, units and incomplete information. Fault scenarios explore rejected commands, retries and interrupted processes. A useful collection covers meaningful differences in behaviour rather than many near-identical examples.\nSynthetic data gives the engineer control over these conditions. The interface should label it clearly and preserve the scenario definition so another run can use the same inputs. Synthetic results illustrate the tested model; they are not evidence about real customer outcomes."
+      ],
+      [
+        "Run the contracts that matter",
+        "A scenario can exercise constraints, business decisions, process transitions and calculations. It should use the relevant supported application contracts so that the behaviour under examination matches the candidate definition.\nFor an approval threshold change, compare the old and new rule against the same agreements. Record which outcomes changed, which stayed stable and whether a changed decision affects the workflow or analytical measures. A pass/fail summary is useful, but the underlying reasons make it actionable."
+      ],
+      [
+        "Attach evidence to a version",
+        "Each result needs enough identity to explain its scope: candidate version, source versions, scenario inputs, runtime version and observed outcome. This prevents evidence from an earlier candidate being presented as validation of a later edit.\nThe AI-assisted loop can consume those findings, suggest a revision and request another permitted run. The task journal records the sequence. The engineer can see why a proposal changed rather than receiving only a final patch."
+      ],
+      [
+        "Keep release checks independent",
+        "Browser simulation is one source of evidence. Repository validation, integration tests and deployment checks answer additional questions. A synthetic scenario cannot establish production throughput, service availability or external-system compatibility by itself.\nThe workbench should carry evidence into review while preserving those distinctions. For ChargeWeave, a settlement correction is a concrete example of a journey whose rules, arithmetic, duplicate protection and process transitions can be examined together."
+      ]
+    ],
+    "takeaway": "Make the effects of a proposed change visible, repeatable and reviewable before release."
+  },
+  {
+    "slug": "model-your-business",
+    "title": "Model your business once, connect its behaviour",
+    "category": "Models & meaning",
+    "deck": "Keep screens, typed interfaces, constraints and measures connected to the same business definitions.",
+    "nodes": [
+      [
+        "Shared meaning",
+        "Customer · agreement · relationship"
+      ],
+      [
+        "Data constraints",
+        "Required facts · valid quantities"
+      ],
+      [
+        "Forms and views",
+        "Collect facts · explain context"
+      ],
+      [
+        "Typed interfaces",
+        "Query · command · metadata"
+      ],
+      [
+        "Decision contracts",
+        "Policy inputs · explicit outcomes"
+      ],
+      [
+        "Analytical definitions",
+        "Grain · scope · aggregation"
+      ]
+    ],
+    "sections": [
+      [
+        "Start with the relationships people recognise",
+        "Business users understand customers, agreements, assets and responsibilities. They also understand that relationships carry meaning: a customer holds an agreement; a party operates an asset; a policy applies for a period. A useful application model makes those distinctions explicit.\nWithout that foundation, a field called owner can mean different things in different screens. An integration may copy the value correctly while losing the business meaning. Syntriq uses ontology identities and explicit contracts to keep that context available."
+      ],
+      [
+        "Connect definitions to behaviour",
+        "A model becomes useful when application behaviour refers back to it. A form collects facts for a declared entity. A constraint checks whether those facts are acceptable. A workflow uses a decision contract to choose the next permitted step. A measure identifies the records and time perspective it summarises.\nThis does not mean every interface can be generated automatically from an ontology. Presentation choices and domain behaviour still need explicit definitions and registered implementations. The benefit is that these pieces have a common reference point."
+      ],
+      [
+        "Expose the model through typed access",
+        "GraphQL provides an interface for querying data and supported metadata. Ontology identities, relationships, constraints and temporal context can travel alongside values, giving consumers enough information to interpret what they receive.\nChanges should respect those contracts. Renaming a display label is different from changing the meaning of a relationship. Altering a quantity’s unit is different from formatting it. The platform architecture needs to preserve those distinctions across interfaces."
+      ],
+      [
+        "Use an agreement as the connecting example",
+        "An agreement form gathers a customer reference, value and effective date. Validation checks required information and compatible quantities. A policy determines whether review is required. The workflow coordinates that review, while the analytical definition determines which agreements count as activated.\nIf the approval condition changes, the application catalogue can identify the rule, its dependent workflow and the relevant scenarios. The engineer can inspect the connected effects without treating each screen as an unrelated feature."
+      ],
+      [
+        "Make reuse a deliberate boundary",
+        "ChargeWeave supplies EV-specific entities and relationships. The generic platform handles supported modelling, constraints, queries and runtime contracts. A reusable component should accept those definitions rather than contain hidden assumptions about charging.\nThat boundary makes extraction practical: stable contracts and executable examples provide a basis for moving generic mechanisms into Syntriq while preserving domain behaviour in the application package."
+      ]
+    ],
+    "takeaway": "Give application components shared references so business meaning survives across interfaces."
+  },
+  {
+    "slug": "decisions-you-can-explain",
+    "title": "Business decisions you can explain",
+    "category": "Rules & decisions",
+    "deck": "Make the facts, policies and reasons behind a business outcome available for review.",
+    "nodes": [
+      [
+        "Relevant facts",
+        "Values · units · effective context"
+      ],
+      [
+        "Constraint checks",
+        "Validity · required information"
+      ],
+      [
+        "Versioned policy",
+        "Applicable rules · explicit precedence"
+      ],
+      [
+        "Decision outcome",
+        "Allowed · rejected · needs information"
+      ],
+      [
+        "Explanation",
+        "Reasons · calculations · rules used"
+      ],
+      [
+        "Permitted command",
+        "Apply transition · retain evidence"
+      ]
+    ],
+    "sections": [
+      [
+        "A decision needs more than an answer",
+        "An agreement requires review. A settlement correction is rejected. An operational action is allowed. Each outcome matters, but people also need to understand the reason, the facts used and the applicable policy. A bare yes or no leaves too much work for the reviewer.\nSyntriq’s decision architecture separates evaluation machinery from application policies. ChargeWeave supplies domain rules; the platform provides the supported evaluation contract and a consistent way to return the result."
+      ],
+      [
+        "Separate validity from policy",
+        "Constraints answer whether the supplied information is structurally and semantically acceptable. Business policies answer what should happen given the relevant facts. A missing currency is different from a valid amount that crosses an approval threshold.\nOntology and supported reasoning establish meaning and relationships. SHACL and domain validators check declared constraints. A versioned evaluator applies business decisions. Keeping these responsibilities clear makes errors easier to diagnose and explanations more useful."
+      ],
+      [
+        "Return the basis of the outcome",
+        "A decision contract should return its outcome, calculated values, reason identifiers, missing information and the rules used. Include the relevant rule version and context so a later reviewer can understand what was evaluated.\nConsider an agreement with a value above the review threshold. The explanation can identify the amount, the policy condition and the required next step. If the amount is absent, the evaluator should report missing information according to the declared contract instead of silently choosing a business outcome."
+      ],
+      [
+        "Coordinate decisions with action",
+        "A workflow can route a review based on the evaluated outcome. A command boundary enforces the permitted transition before applying a change. This matters because an interface can become stale, and a model-generated suggestion is not an authorisation.\nDependencies, conflicting rules and precedence require explicit definitions. The engineering specification must state how applicable policies are selected and what happens when evaluation cannot produce a valid result. Those semantics should be testable with focused scenarios."
+      ],
+      [
+        "Use AI to inspect and improve the process",
+        "AI assistance can locate policies, explain their source definitions and propose a candidate change. The workbench then invokes the actual evaluator through the capability broker and returns evidence. That feedback gives the engineer something stronger than a plausible explanation.\nA rule change can be compared across routine and boundary cases. The decision trace then connects product intent, executable policy and observed behaviour, making review a discussion about specific consequences."
+      ]
+    ],
+    "takeaway": "Connect each business decision to its facts, policy version and reasons."
+  },
+  {
+    "slug": "events-to-action",
+    "title": "From business events to coordinated action",
+    "category": "Processes & commands",
+    "deck": "Connect events, decisions and tasks through explicit processes with observable outcomes.",
+    "nodes": [
+      [
+        "Business event",
+        "Agreement submitted · event identity"
+      ],
+      [
+        "Current context",
+        "Facts · state · policy references"
+      ],
+      [
+        "Decision",
+        "Review required? · reason"
+      ],
+      [
+        "Human task",
+        "Authorised reviewer · recorded choice"
+      ],
+      [
+        "Command boundary",
+        "Permission · validation · duplicate check"
+      ],
+      [
+        "Recorded outcome",
+        "State transition · trace · next event"
+      ]
+    ],
+    "sections": [
+      [
+        "Make the path through work explicit",
+        "A business event often starts a chain of work. An agreement is submitted, information is checked, someone reviews an exception and an activation follows. When those steps live in disconnected handlers, it becomes difficult to explain where the work is or why it stopped.\nSyntriq connects events to explicit process definitions. Each step has a responsibility, and the workflow coordinates how supported tasks, decisions and commands fit together."
+      ],
+      [
+        "Keep process and policy connected",
+        "The process determines when a decision is needed and what to do with its outcome. The policy determines the business answer. For an agreement, the workflow asks whether review is required; the versioned rule evaluates the relevant facts.\nThis separation allows a policy threshold to change without duplicating the approval logic across every screen. It also makes the process easier to inspect: the decision result and the path taken can be shown together."
+      ],
+      [
+        "Treat human work as part of the system",
+        "A review task needs a clear purpose, the relevant facts and a record of the reviewer’s choice. The application should preserve the relationship between that choice and the transition it permits. An interface can present the task without becoming the only place where its rules are enforced.\nFor a correction journey in ChargeWeave, this connects a proposed correction to validation, calculated values, review and application. The specific business definitions belong to the domain application."
+      ],
+      [
+        "Apply changes through commands",
+        "Commands are the boundary at which an intended action becomes a state change. The contract describes permissions, validation, duplicate handling and failure behaviour. An event may be delivered again or an engineer may retry a request; the action must follow its declared semantics.\nXFlow and XState provide process and state coordination in the established direction. Visual process explanations should match the supported execution contract. A diagram alone does not establish that every notation or external workflow engine is executable."
+      ],
+      [
+        "Give the engineer an observable journey",
+        "A process trace should make it possible to see the initiating event, decisions, tasks and command results. Scenario runs can then explore a normal journey, a rejected action or an interrupted step. The AI workbench can use those traces to investigate a candidate change.\nAs the generic runtime moves into Syntriq, these contracts provide the continuity. The domain package still defines what the business process means; the reusable engine coordinates its supported operations."
+      ]
+    ],
+    "takeaway": "Make work traceable from the initiating event to the resulting business action."
+  },
+  {
+    "slug": "business-over-time",
+    "title": "Understand your business as it was known",
+    "category": "Time & history",
+    "deck": "Distinguish when a fact applied from when your organisation learned about it.",
+    "nodes": [
+      [
+        "Business event",
+        "Agreement effective on 1 January"
+      ],
+      [
+        "Initial knowledge",
+        "Recorded on 3 January"
+      ],
+      [
+        "Original report",
+        "Knowledge cutoff: 31 January"
+      ],
+      [
+        "Later correction",
+        "Recorded on 12 February"
+      ],
+      [
+        "Corrected view",
+        "January with later knowledge"
+      ],
+      [
+        "Explain the difference",
+        "Same period · different knowledge"
+      ]
+    ],
+    "sections": [
+      [
+        "Two reasonable reports can disagree",
+        "A January report is produced at the end of the month. In February, a correction arrives that changes a fact effective in January. A later report for January now shows a different result. Both reports may be internally consistent, but they answer different questions.\nSyntriq’s temporal architecture distinguishes effective time from recorded knowledge. Effective time describes when a fact applies in the business. Recorded knowledge describes when that information became available to the system."
+      ],
+      [
+        "Ask the question with its time perspective",
+        "One question is: what do we now understand about January? Another is: what did we understand when the January report was produced? A useful interface makes the distinction explicit through period and knowledge-cutoff context.\nThat context needs to follow relationships as well as individual values. If responsibility for an agreement changes, the historical relationship can matter to both a decision and a report. Looking only at the current owner may answer the wrong question."
+      ],
+      [
+        "Follow a correction through the views",
+        "Imagine an agreement effective from 1 January and recorded on 3 January. A report is generated with a 31 January knowledge cutoff. On 12 February, corrected information arrives that applies from the agreement’s original effective date.\nThe original-knowledge view retains the basis available at the January cutoff. The corrected view uses the later information. A comparison should show the changed fact and its consequences, giving readers an explanation instead of an unexplained restatement."
+      ],
+      [
+        "Carry time into decisions and measures",
+        "A policy evaluation needs to identify the applicable rules and facts. An analytical measure needs a period, an aggregation definition and a knowledge perspective. These contexts should be included in evidence so that later review can reconstruct the question being answered.\nTemporal design also requires explicit treatment of corrections, interval boundaries and invalid ranges. Those details belong in supported contracts and scenario tests rather than being left to individual screens."
+      ],
+      [
+        "Give AI the right historical context",
+        "An AI assistant investigating a discrepancy should retrieve the relevant versions and cutoff information. Current definitions alone may not explain a historical outcome. The Context Engine should make the selected time perspective visible alongside source provenance.\nChargeWeave offers concrete examples through corrections and operational history. The generic Syntriq story is broader: organisations can explain changing knowledge without erasing the context of earlier decisions."
+      ]
+    ],
+    "takeaway": "Explain historical outcomes using both the business period and the knowledge available at the time."
+  },
+  {
+    "slug": "analytics-with-meaning",
+    "title": "Analytics with business meaning attached",
+    "category": "Analytics & evidence",
+    "deck": "Keep measure definitions, time perspectives and source context connected to the numbers people use.",
+    "nodes": [
+      [
+        "Operational facts",
+        "Source events · identities · units"
+      ],
+      [
+        "Refined data",
+        "Validated relationships · aligned meaning"
+      ],
+      [
+        "Semantic measures",
+        "Grain · numerator · denominator"
+      ],
+      [
+        "Time perspective",
+        "Period · knowledge cutoff"
+      ],
+      [
+        "Business views",
+        "Reusable charts · filters · comparisons"
+      ],
+      [
+        "Evidence",
+        "Definitions · completeness · provenance"
+      ]
+    ],
+    "sections": [
+      [
+        "A number needs a definition",
+        "An activation rate can look precise while hiding important choices. Which agreements belong in the denominator? Does activation mean approval or a completed operational transition? Which period applies? How are late corrections treated? Without these answers, two teams can use the same label for different measures.\nSyntriq’s analytical direction connects measures to the application’s business model. A measure carries its definition and context so that a chart can explain what the value represents."
+      ],
+      [
+        "Connect the operational and analytical layers",
+        "Operational facts supply events, identities and quantities. Refinement validates and aligns them. Semantic definitions then specify the grain, numerator, denominator, aggregation behaviour and scope of a measure. The visual component presents a selected view of that definition.\nBronze, silver and gold remain useful ways to organise data processing. The semantic layer supplies business meaning across those stages; it does not remove the need for ingestion, transformation or storage infrastructure."
+      ],
+      [
+        "Preserve the context of aggregation",
+        "Some quantities can be summed across compatible records. Ratios, balances and snapshots need different treatment. A measure contract should declare supported aggregation and relevant units so a reusable component cannot casually combine incompatible values.\nRelationships also matter. Grouping by a customer, operator or agreement depends on the business relationship and sometimes its effective period. Ontology identity gives the analytical definition a reference back to the model it summarises."
+      ],
+      [
+        "Make time and completeness visible",
+        "A January activation measure produced in February may include information unavailable at the original month-end cutoff. A view should preserve its period and knowledge perspective. Completeness indicators should explain known gaps rather than imply that every record has arrived.\nAn engineer investigating a difference needs the definition, filters, source versions and cutoff context. That evidence makes a discrepancy traceable and supports a meaningful comparison between two views."
+      ],
+      [
+        "Reuse views through explicit contracts",
+        "A reusable chart or pane can consume measure metadata, dimensions and supported operations. The application package supplies domain definitions; the UI component handles presentation consistently. ChargeWeave can define charging and settlement measures without making the generic chart aware of EV-specific concepts.\nAI assistance can help locate a measure and inspect its dependencies, but proposed analytical changes still need validation. Scenarios should exercise changed inclusion rules, boundary periods and aggregation behaviour before a new definition is adopted."
+      ]
+    ],
+    "takeaway": "Give every analytical view a traceable definition, business scope and time perspective."
+  },
+  {
+    "slug": "engineering-request-to-evidence",
+    "title": "From an engineering request to tested evidence",
+    "category": "AI engineering",
+    "deck": "Follow an approval-rule change from the engineer’s request to an inspectable candidate and its checks.",
+    "nodes": [
+      [
+        "Discover",
+        "Locate rule · workflow · form"
+      ],
+      [
+        "Understand",
+        "Select sources · identify unknowns"
+      ],
+      [
+        "Propose",
+        "Isolated candidate · bounded change"
+      ],
+      [
+        "Exercise",
+        "Constraints · decisions · scenarios"
+      ],
+      [
+        "Investigate",
+        "Compare evidence · revise candidate"
+      ],
+      [
+        "Review",
+        "Human decision · independent checks"
+      ]
+    ],
+    "sections": [
+      [
+        "Begin with a bounded request",
+        "An engineer asks for an additional approval when an agreement exceeds a threshold. The task sounds straightforward, but it touches the facts collected by a form, a decision policy, a process route and the scenarios used to check behaviour.\nThe first step is to establish the intended change and its boundaries. Which agreements are affected? What quantity is compared? What happens exactly at the threshold? Questions that remain unanswered belong in the task journal."
+      ],
+      [
+        "Find and inspect the existing capability",
+        "The catalogue locates the relevant rule and related components. The Context Engine selects source definitions, contracts and applicable evidence. The workbench records their versions, making the basis of the proposal visible.\nCloud reasoning receives this focused context through the authenticated model adapter. The browser coordinator retains task control. A source reference or dependency that cannot be resolved becomes a reported gap rather than an invented implementation detail."
+      ],
+      [
+        "Propose a change in an isolated workspace",
+        "AI proposes a bounded candidate. The engineer should be able to compare it with the original definition and understand which components changed. The candidate has its own identity so subsequent evidence can be attached to exactly the version being examined.\nThe capability broker validates tool requests against supported schemas and permissions. Reading a definition, evaluating a policy and applying a mutation are distinct operations. External capabilities, including optional MCP providers, have explicit boundaries."
+      ],
+      [
+        "Exercise the consequences",
+        "The scenario collection includes an agreement below the threshold, one exactly at it, one above it and one missing a required fact. Additional cases can exercise incompatible quantities, repeated commands or a workflow interruption where relevant.\nRuntime results show the policy outcome, reason and process consequence. The engineer compares baseline and candidate behaviour. If an unexpected result appears, AI can inspect the trace, revise the candidate and request another supported run. Earlier evidence stays associated with its original version."
+      ],
+      [
+        "Review the change and its evidence",
+        "The final review brings together the request, candidate difference, selected sources, scenario results and remaining questions. The task journal explains the sequence of attempts. Independent repository checks provide additional validation before release.\nThis workflow illustrates the AI integration design; it is not a live API demonstration on the static website. Its value is the structure of the engineering process: application knowledge becomes context, tools produce observations and the engineer retains an inspectable basis for a decision."
+      ]
+    ],
+    "takeaway": "Turn a request into a reviewable change with evidence tied to the candidate being considered."
+  },
+  {
+    "slug": "one-platform-many-applications",
+    "title": "One platform, different business applications",
+    "category": "Applications",
+    "deck": "Keep reusable platform mechanisms separate from the domain definitions that make each application useful.",
+    "nodes": [
+      [
+        "Syntriq foundation",
+        "Models · decisions · workflow runtime"
+      ],
+      [
+        "Application contracts",
+        "Typed boundaries · registered tools"
+      ],
+      [
+        "ChargeWeave package",
+        "EV ontology · policies · measures"
+      ],
+      [
+        "Domain experience",
+        "Operational views · tasks · branding"
+      ],
+      [
+        "Engineering workbench",
+        "Catalogue · AI tools · scenarios"
+      ],
+      [
+        "Reusable evolution",
+        "Stable contracts · portable mechanisms"
+      ]
+    ],
+    "sections": [
+      [
+        "Reuse starts with a clear boundary",
+        "An application platform becomes difficult to reuse when its core quietly assumes one industry. A generic decision service should not need a special branch for a charging settlement. A reusable chart should not hard-code an EV measure. Domain knowledge belongs in explicit application definitions.\nSyntriq’s platform direction separates reusable mechanisms from domain packages. ChargeWeave supplies a concrete application through which those boundaries can be exercised."
+      ],
+      [
+        "Let the domain describe its business",
+        "The ChargeWeave package provides EV entities, relationships, constraints, versioned policies, workflows, measures and branding. These definitions describe what the application means and how its domain behaves. Registered implementations cover behaviour that needs explicit code.\nThe platform supplies the supported runtime contracts: querying, validation, decision evaluation, process coordination, temporal context and analytical interfaces. Its supported semantic subset must be declared rather than implying unrestricted execution of every ontology construct."
+      ],
+      [
+        "Use a correction journey as a reference",
+        "A settlement correction connects a form, typed data access, constraints, calculations, a policy decision and a workflow. It provides a useful reference journey because a change can have visible consequences across several layers.\nThe reusable boundary can be examined at each step. Decimal arithmetic is a generic concern; the domain defines which amounts enter the calculation. Duplicate protection is a runtime concern; the application defines the meaning of the command."
+      ],
+      [
+        "Keep engineering context portable",
+        "The catalogue and Context Engine should discover application definitions through common contracts. AI tools can then inspect the current domain package without embedding charging-specific assumptions in the coordinator. Scenarios and evidence retain their source and candidate identities.\nThis gives the engineering workbench a reusable shape while leaving the relevant business knowledge in the application. A different domain would provide different definitions, policies and scenarios through those interfaces."
+      ],
+      [
+        "Extract along tested seams",
+        "The technical work can continue inside ChargeWeave while the generic contracts become clearer. Extraction should move a reusable mechanism behind an established interface and exercise the same reference journeys against it.\nA second domain can later help expose hidden assumptions, but the commercial site should not imply existing customers or deployed applications that have not been established. ChargeWeave is the concrete example; the broader platform proposition rests on the separation of responsibilities."
+      ]
+    ],
+    "takeaway": "Evolve reusable platform mechanisms while keeping industry knowledge in explicit application packages."
+  }
+]

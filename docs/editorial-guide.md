@@ -25,3 +25,11 @@ The three 1536 × 1024 PNG illustrations were generated with the built-in image-
 ## Publishing
 
 Articles live in insights/ and use the shared stylesheet and progressive enhancement script. Add new article links to the Insights index, homepage and related-reading sections. GitHub Actions validates cross-page links and packages insights/ together with the public assets. Run `python3 scripts/validate.py` and `node --check app.js` before publishing.
+
+## Exact explanatory diagram system
+
+The extended series pairs the retained rich brand artwork with exact explanatory diagrams. Source data lives in `content/articles.json`; `scripts/build_content.py` generates the HTML and SVG sources. SVGs are editable and render to 2000 × 1300 PNG plus 1000 × 650 card previews through `scripts/render_diagrams.sh` (Inkscape). Retain navy, teal, cyan, subtle grid depth and layered panels. Six large labelled areas use a serpentine reading order; dashed feedback paths are reserved for engineering loops. Labels use DejaVu Sans, at least 25px for supporting information in the full-size source. Do not put prose inside diagrams.
+
+The original generated editorial illustrations remain available in assets/insights; no logo is recreated. Exact diagrams are authored as vectors because relationships, ordering and labels must remain controlled. Each diagram has an accessible HTML equivalent and an image description. Do not crop diagram previews.
+
+Source changes: edit content/articles.json, run `python3 scripts/build_content.py`, then render changed diagram PNGs. Inspect the PNG output before committing. The website is buildless; GitHub only regenerates HTML/SVG to detect drift and validates the committed PNGs. Internal source/docs/scripts are excluded from the published artifact.

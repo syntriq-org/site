@@ -18,11 +18,15 @@ jobs:
         with:
           node-version: '22'
       - run: node --check app.js
+      - name: Verify generated editorial content
+        run: |
+          python3 scripts/build_content.py
+          git diff --exit-code
       - run: python3 scripts/validate.py
       - name: Package public files only
         run: |
           mkdir _site
-          cp index.html style.css app.js _site/
+          cp *.html style.css app.js sitemap.xml _site/
           cp -r assets insights _site/
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3

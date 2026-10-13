@@ -14,7 +14,7 @@ Run `node --check app.js` and `python3 scripts/validate.py`.
 
 In repository Settings → Pages, select **GitHub Actions** as the source. The `Validate and deploy website` workflow validates every push/PR and deploys pushes to `main`. Expected URL: https://syntriq-org.github.io/site/
 
-Only index.html, style.css, app.js, insights and assets are included in the deployment. Relative URLs support both the `/site/` project path and a future custom domain.
+Only root HTML pages, style.css, app.js, sitemap.xml, insights and assets are included in the deployment. Relative URLs support both the `/site/` project path and a future custom domain.
 
 ## Brand and content
 
@@ -23,3 +23,7 @@ Midnight navy `#090f1a`, teal `#20bbae`, cyan `#31c3ea`. The approved generated 
 The Studio interaction is explicitly an illustrative concept, not a product screenshot or live application. Product articles explain the architecture without implementation-status badges. Do not add unverified customer, performance, certification or production-readiness claims.
 
 The header shrinks after 35px of scrolling. Entrance motion respects `prefers-reduced-motion`; content remains visible without JavaScript. Navigation and Studio tabs support keyboard use. No lead form is shown until a real contact destination is supplied; the CTA links to the organization.
+
+## Editorial source and contracts
+
+Edit `content/articles.json`, then run `python3 scripts/build_content.py`. Export PNGs using `bash scripts/render_diagrams.sh` with Inkscape installed. The website itself has no runtime dependencies. GitHub validates generated-output consistency and public links before deploying. See `docs/product-site-plan.md`, `docs/editorial-guide.md` and `docs/ai-integration-contracts.md`.
