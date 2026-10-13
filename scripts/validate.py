@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+from urllib.parse import urlsplit, unquote
 
 root = Path(__file__).resolve().parent.parent
 class SiteParser(HTMLParser):
@@ -17,13 +18,22 @@ class SiteParser(HTMLParser):
             if name in a: self.links.append(a[name])
         if tag == 'img': assert 'alt' in a, 'Image requires alt text'
 
-parser = SiteParser()
-parser.feed((root / 'index.html').read_text())
-for link in parser.links:
-    if link.startswith('#'):
-        assert link == '#' or link[1:] in parser.ids, f'Broken anchor: {link}'
-    elif not link.startswith(('https:', 'http:', 'mailto:', 'data:')):
-        assert (root / link).is_file(), f'Missing asset: {link}'
+pages = [root / 'index.html', *sorted((root / 'insights').glob('*.html'))]
+parsers = {}
+for page in pages:
+    parser = SiteParser()
+    parser.feed(page.read_text())
+    parsers[page.resolve()] = parser
+for page, parser in parsers.items():
+    for link in parser.links:
+        url = urlsplit(link)
+        if url.scheme or url.netloc:
+            continue
+        target = (page.parent / unquote(url.path)).resolve() if url.path else page
+        assert target.is_relative_to(root), f'Link escapes public root: {link}'
+        assert target.is_file(), f'Missing asset in {page.name}: {link}'
+        if url.fragment:
+            assert target in parsers and unquote(url.fragment) in parsers[target].ids, f'Broken anchor in {page.name}: {link}'
 for asset in re.findall(r"url\(['\"]?([^)'\"]+)", (root / 'style.css').read_text()):
     assert (root / asset).is_file(), f'Missing CSS asset: {asset}'
-print('Validated page anchors, IDs, image alternatives and local assets.')
+print(f'Validated {len(pages)} pages: cross-page anchors, IDs, image alternatives and local assets.')

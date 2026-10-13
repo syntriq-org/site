@@ -21,5 +21,5 @@ const views = {
 const tabs = [...document.querySelectorAll('[role="tab"]')];
 function selectTab(tab) { tabs.forEach(item => { item.setAttribute('aria-selected', String(item === tab)); item.tabIndex = item === tab ? 0 : -1; }); const panel = document.querySelector('#demo-panel'); panel.innerHTML = views[tab.dataset.view]; panel.setAttribute('aria-labelledby', tab.id); }
 tabs.forEach((tab, index) => { tab.addEventListener('click', () => selectTab(tab)); tab.addEventListener('keydown', event => { let next; if(event.key === 'ArrowRight') next = (index + 1) % tabs.length; if(event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length; if(event.key === 'Home') next = 0; if(event.key === 'End') next = tabs.length - 1; if(next !== undefined) { event.preventDefault(); tabs[next].focus(); selectTab(tabs[next]); } }); });
-selectTab(tabs[0]);
+if (tabs.length) selectTab(tabs[0]);
 document.querySelector('#year').textContent = new Date().getFullYear();
